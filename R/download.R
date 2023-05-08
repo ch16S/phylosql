@@ -581,7 +581,7 @@ fetch_asv_table_by_sample<-
     if(is.null(whichSamples)){
       stop("You need to specify samples.")
     }
-    asv_long<- fetch_asvs_by_sample(samples=whichSamples,con=con,database=database)
+    asv_long<- fetch_asvs_by_sample(samples=whichSamples,con=eval(parse(text = paste0(con))),database=database)
     
     
     asv_table <- construct_asv_table(asv_long)
