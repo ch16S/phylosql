@@ -114,8 +114,8 @@ if(!is.null(whichSamples)){
 
 asv_long = asv_long[order(asv_long$MetagenNumber,asv_long$SV),]
 gc()
-asvs<- unique(asv_long$SV)
-samples<- unique(asv_long$MetagenNumber)
+asvs<- unique(as.character(asv_long$SV))
+samples<- unique(as.character(asv_long$MetagenNumber))
 
 asv_table <-
   Matrix::sparseMatrix(
@@ -419,8 +419,8 @@ fetch_asv_table_sparse_by_sample<-
 
   asv_long = asv_long[order(asv_long$MetagenNumber,asv_long$SV),]
   gc()
-  asvs<- unique(asv_long$SV)
-  samples<- unique(asv_long$MetagenNumber)
+  asvs<- unique(as.character(asv_long$SV))
+  samples<- unique(as.character(asv_long$MetagenNumber))
 
   asv_table <-
     Matrix::sparseMatrix(
