@@ -527,3 +527,30 @@ add_quotes<- function(x){
   unlist(vec)
 
 }
+#' A phylosql Function to construct an asv table
+#'
+#'
+#' @param asv_long
+#' @keywords
+#' @export
+#'
+construct_asv_table<- function(asv_long){
+  
+  asvs <- unique(asv_long$SV)
+  samples <- unique(asv_long$MetagenNumber)
+  rows <- length(samples)
+  cols <- length(asvs)
+  asv_table <- matrix(0L, ncol = cols, nrow = rows)
+  sampleList <- split(asv_long, asv_long$MetagenNumber)
+  for (i in seq_along(sampleList)) {
+    asv_table[i, match(sampleList[[i]]$SV, asvs)] <- sampleList[[i]]$Abundance
+  }
+  rownames(asv_table) <- names(sampleList)
+  colnames(asv_table) <- asvs
+  rm(asvlong)
+  rm(sampleList)
+  asv_table <- as(asv_table, "dgCMatrix")
+  gc()
+  return(asv_table)
+  
+}
